@@ -39,3 +39,18 @@ for sequenceIDs := range handler.Messages() { // Read all the sequence IDs (sequ
 	}
 }
 ```
+
+It will output the sequence IDs in order, regardless of the goroutines execution:
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
