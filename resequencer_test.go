@@ -15,7 +15,7 @@ func TestNominal(t *testing.T) {
 	handler.Push(1)
 	handler.Push(2)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0, 1, 2})
 }
 
@@ -26,7 +26,7 @@ func TestOutOfOrder(t *testing.T) {
 	handler.Push(1)
 	handler.Push(0)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0, 1, 2})
 }
 
@@ -37,7 +37,7 @@ func TestMissing(t *testing.T) {
 	handler.Push(3)
 	handler.Push(0)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0})
 }
 
