@@ -11,33 +11,33 @@ import (
 func TestNominal(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	handler := NewHandler(ctx, -1)
-	handler.Pop(0)
-	handler.Pop(1)
-	handler.Pop(2)
+	handler.Push(0)
+	handler.Push(1)
+	handler.Push(2)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0, 1, 2})
 }
 
 func TestOutOfOrder(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	handler := NewHandler(ctx, -1)
-	handler.Pop(2)
-	handler.Pop(1)
-	handler.Pop(0)
+	handler.Push(2)
+	handler.Push(1)
+	handler.Push(0)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0, 1, 2})
 }
 
 func TestMissing(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	handler := NewHandler(ctx, -1)
-	handler.Pop(2)
-	handler.Pop(3)
-	handler.Pop(0)
+	handler.Push(2)
+	handler.Push(3)
+	handler.Push(0)
 	cancel()
-	time.Sleep(100 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	assertHandler(t, handler, []int{0})
 }
 

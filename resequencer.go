@@ -1,3 +1,4 @@
+// Package resequencer handles resequencing operations.
 package resequencer
 
 import (
@@ -7,16 +8,16 @@ import (
 	"github.com/emirpasic/gods/trees/binaryheap"
 )
 
+// Handler is the parent struct handling the resequencing operations.
 type Handler struct {
 	expected int
 	push     chan struct{}
 	ch       chan []int
-	once     sync.Once
-	closed   bool
 	mu       sync.Mutex
 	minHeap  *binaryheap.Heap
 }
 
+// NewHandler creates a new Handler.
 func NewHandler(ctx context.Context, current int) *Handler {
 	handler := &Handler{
 		expected: current + 1,
@@ -60,13 +61,17 @@ func (h *Handler) process(ctx context.Context) {
 	}
 }
 
-func (h *Handler) Pop(i int) {
+// Push adds new sequence identifiers.
+func (h *Handler) Push(sequenceIDs ...int) {
 	h.mu.Lock()
-	h.minHeap.Push(i)
+	for _, sequenceID := range sequenceIDs {
+		h.minHeap.Push(sequenceID)
+	}
 	h.mu.Unlock()
 	h.push <- struct{}{}
 }
 
+// Messages returns the channel of messages.
 func (h *Handler) Messages() <-chan []int {
 	return h.ch
 }
