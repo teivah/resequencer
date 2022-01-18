@@ -29,7 +29,7 @@ for i := 0; i < max; i++ {
 	}()
 }
 
-for sequenceIDs := range handler.Messages() { // Read all the sequence IDs (sequenceIDs is an []int).
+for sequenceIDs := range handler.Messages() { // Read all the sequence IDs (sequenceIDs is an []int)
 	for _, sequenceID := range sequenceIDs {
 		fmt.Println(sequenceID)
 		if sequenceID == max-1 {
