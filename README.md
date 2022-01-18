@@ -3,7 +3,7 @@
 ![CI](https://github.com/teivah/resequencer/actions/workflows/ci.yml/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/teivah/resequencer)](https://goreportcard.com/report/github.com/teivah/resequencer)
 
-Resequencing in Go
+A Go resequencer
 
 ## Introduction
 
